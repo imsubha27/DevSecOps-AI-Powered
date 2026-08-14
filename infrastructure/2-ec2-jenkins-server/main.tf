@@ -20,8 +20,9 @@ resource "aws_instance" "jenkins" {
     # Update packages
     apt-get update -y
 
+
     # Install Java, Docker, and required utilities
-    apt-get install -y fontconfig openjdk-21-jre curl wget gnupg  maven unzip docker.io
+    apt-get install -y fontconfig openjdk-21-jre curl wget gnupg maven unzip docker.io
 
     # Enable Docker
     systemctl enable --now docker
