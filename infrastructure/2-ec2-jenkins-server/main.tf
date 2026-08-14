@@ -21,7 +21,7 @@ resource "aws_instance" "jenkins" {
     apt-get update -y
 
     # Install Java, Docker, and required utilities
-    apt-get install -y fontconfig openjdk-17-jre curl wget gnupg docker.io
+    apt-get install -y fontconfig openjdk-21-jre curl wget gnupg  maven unzip docker.io
 
     # Enable Docker
     systemctl enable --now docker
@@ -35,15 +35,12 @@ resource "aws_instance" "jenkins" {
 
     usermod -aG docker jenkins
     usermod -aG docker ubuntu
-    
-    apt install -y maven
 
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
     chmod +x kubectl
     mv kubectl /usr/local/bin/
     kubectl version --client
 
-    apt install -y unzip
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
     ./aws/install
